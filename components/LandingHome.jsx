@@ -33,6 +33,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Globe,
+  ArrowUpRight,
 } from "lucide-react";
 
 /* ─── Data ────────────────────────────────────────────── */
@@ -52,7 +53,8 @@ const services = [
     icon: Wifi,
     href: "/signin",
     color: "from-blue-600 to-indigo-700",
-    bgGlow: "group-hover:shadow-blue-500/20",
+    bgGlow: "group-hover:shadow-blue-500/10",
+    accent: "blue",
   },
   {
     title: "Airtime Top-up",
@@ -61,7 +63,8 @@ const services = [
     icon: Smartphone,
     href: "/signin",
     color: "from-rose-500 to-red-600",
-    bgGlow: "group-hover:shadow-red-500/20",
+    bgGlow: "group-hover:shadow-red-500/10",
+    accent: "rose",
   },
   {
     title: "Cable TV",
@@ -70,7 +73,8 @@ const services = [
     icon: Tv,
     href: "/signin",
     color: "from-purple-500 to-violet-600",
-    bgGlow: "group-hover:shadow-purple-500/20",
+    bgGlow: "group-hover:shadow-purple-500/10",
+    accent: "purple",
   },
   {
     title: "Electricity Bills",
@@ -79,7 +83,8 @@ const services = [
     icon: Bolt,
     href: "/signin",
     color: "from-amber-500 to-orange-600",
-    bgGlow: "group-hover:shadow-amber-500/20",
+    bgGlow: "group-hover:shadow-amber-500/10",
+    accent: "amber",
   },
 ];
 
@@ -252,79 +257,71 @@ const LandingHome = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#fafbfc] text-slate-900">
+    <main className="min-h-screen bg-[#fafbfc] text-slate-900 overflow-hidden">
       {/* ═══ HEADER ═══ */}
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "border-b border-slate-200/60 bg-white/80 shadow-sm backdrop-blur-xl"
+            ? "border-b border-slate-200/60 bg-white/85 backdrop-blur-2xl shadow-sm"
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2 sm:gap-3">
-            <Image
-              src={Logo}
-              alt="AR Data"
-              className="h-8 w-8 sm:h-11 sm:w-11 rounded-full object-cover"
-              priority
-            />
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3">
+            <div className="relative">
+              <Image
+                src={Logo}
+                alt="AR Data"
+                className="relative h-9 w-9 sm:h-11 sm:w-11 rounded-full object-cover ring-2 ring-blue-600/10"
+                priority
+              />
+            </div>
             <div className="flex flex-col">
               <span className="text-base sm:text-lg font-bold tracking-tight text-slate-950">
                 AR Data
               </span>
-              <span className="text-[8px] sm:text-[10px] font-semibold uppercase tracking-widest text-blue-600">
+              <span className="text-[8px] sm:text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-600">
                 VTU Platform
               </span>
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-            <a
-              href="#services"
-              className="transition-colors hover:text-blue-600"
-            >
-              Services
-            </a>
-            <a
-              href="#why-us"
-              className="transition-colors hover:text-blue-600"
-            >
-              Why AR Data
-            </a>
-            <a
-              href="#testimonials"
-              className="transition-colors hover:text-blue-600"
-            >
-              Reviews
-            </a>
-            <a
-              href="#faq"
-              className="transition-colors hover:text-blue-600"
-            >
-              FAQ
-            </a>
+          <nav className="hidden items-center gap-1 md:flex">
+            {[
+              { label: "Services", href: "#services" },
+              { label: "Why AR Data", href: "#why-us" },
+              { label: "Reviews", href: "#testimonials" },
+              { label: "FAQ", href: "#faq" },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="rounded-lg px-4 py-2 text-sm font-medium text-slate-600 transition-all hover:text-blue-600 hover:bg-slate-50"
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <Link
               href="/signin"
-              className="hidden rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 sm:inline-flex"
+              className="hidden rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-600 transition hover:text-blue-600 hover:bg-slate-100 sm:inline-flex"
             >
               Sign in
             </Link>
             <Link
               href="/signup"
-              className="inline-flex items-center gap-1 sm:gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-all hover:shadow-xl hover:shadow-blue-600/30 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-1.5 sm:gap-2 rounded-xl bg-blue-600 px-4 py-2.5 sm:px-6 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-0.5 active:translate-y-0"
             >
               Get Started
-              <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
+              <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </Link>
 
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="ml-1 rounded-lg p-2 text-slate-600 hover:bg-slate-100 md:hidden"
+              className="ml-1 rounded-lg p-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 md:hidden"
             >
               {mobileMenuOpen ? (
                 <X className="h-5 w-5" />
@@ -337,7 +334,7 @@ const LandingHome = () => {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="border-t border-slate-200/60 bg-white/95 backdrop-blur-xl md:hidden">
+          <div className="border-t border-slate-200/60 bg-white/95 backdrop-blur-2xl md:hidden">
             <nav className="flex flex-col gap-1 px-4 py-3">
               {["Services", "Why AR Data", "Reviews", "FAQ"].map((item) => (
                 <a
@@ -357,208 +354,106 @@ const LandingHome = () => {
       {/* ═══ HERO ═══ */}
       <section
         ref={heroRef}
-        className="relative overflow-hidden hero-gradient"
+        className="relative pt-28 pb-14 sm:pb-16 overflow-hidden"
       >
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-blue-400/10 blur-3xl" />
-          <div className="absolute top-1/2 -left-20 h-60 w-60 rounded-full bg-rose-400/10 blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 h-40 w-40 rounded-full bg-blue-300/10 blur-2xl" />
-        </div>
+        {/* Background decorations */}
+        <div className="absolute inset-0 pointer-events-none hero-gradient" />
+        {/* Subtle dot grid pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-50 pointer-events-none" />
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-blue-400/[0.04] blur-[100px] pointer-events-none" />
 
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-16 pt-10 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:pb-24 lg:pt-16">
-          {/* Left column – text */}
+        <div className="relative mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+          {/* Centered text block */}
           <div
-            className={`flex flex-col justify-center ${
-              heroVisible ? "animate-slide-in-left" : "opacity-0"
+            className={`mx-auto max-w-3xl text-center ${
+              heroVisible ? "animate-slide-up" : "opacity-0"
             }`}
           >
-            <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/80 px-4 py-1.5 text-sm font-medium text-blue-800 backdrop-blur-sm">
+            <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700">
               <Sparkles className="h-4 w-4 text-blue-600" />
-              Nigeria's trusted VTU platform
+              Nigeria&apos;s trusted VTU platform
             </div>
 
-            <h1 className="max-w-xl text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-950 sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-950 sm:text-5xl lg:text-[3.5rem]">
               Buy Data, Airtime &{" "}
-              <span className="gradient-text">Pay Bills</span> Instantly
+              <span className="gradient-text">Pay Bills</span>
+              <br className="hidden sm:block" /> Instantly
             </h1>
 
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-slate-600 sm:text-lg">
+            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-slate-500 sm:text-lg">
               AR Data gives individuals, agents, and growing teams a simple
               place to recharge phones, manage subscriptions, and settle
               utilities — all from one powerful platform.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
               <Link
                 href="/signup"
-                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-slate-900/20 transition-all hover:bg-slate-800 hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-500 hover:-translate-y-0.5"
               >
                 Create Free Account
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/signin"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-7 py-3.5 text-sm font-semibold text-slate-800 transition hover:border-slate-400 hover:bg-slate-50"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-slate-400"
               >
                 Sign In to Dashboard
               </Link>
-            </div>
+          </div>
+          </div>
 
-            {/* Stats row */}
-            <div className="mt-12 grid max-w-lg grid-cols-4 gap-4">
-              {stats.map((item, i) => {
+          {/* Stats bar */}
+          <div
+            className={`mt-16 mx-auto max-w-3xl ${
+              heroVisible ? "animate-slide-up" : "opacity-0"
+            }`}
+            style={{ animationDelay: "400ms" }}
+          >
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-0 sm:divide-x sm:divide-slate-200 rounded-2xl bg-white ring-1 ring-slate-200 shadow-sm px-2 py-4 sm:py-5">
+              {stats.map((item) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.label} className="text-center">
-                    <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+                  <div key={item.label} className="flex items-center justify-center gap-3 px-4">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
                       <Icon className="h-4 w-4" />
                     </div>
-                    <p className="text-xl font-bold text-slate-950">
-                      {item.value}
-                    </p>
-                    <p className="mt-0.5 text-[11px] font-medium text-slate-500">
-                      {item.label}
-                    </p>
+                    <div>
+                      <p className="text-lg font-bold text-slate-950 leading-tight">
+                        {item.value}
+                      </p>
+                      <p className="text-[11px] font-medium text-slate-500">
+                        {item.label}
+                      </p>
+                    </div>
                   </div>
                 );
               })}
-            </div>
-          </div>
-
-          {/* Right column – Hero image with logos */}
-          <div
-            className={`relative flex items-center justify-center ${
-              heroVisible ? "animate-slide-in-right" : "opacity-0"
-            }`}
-          >
-            {/* Main image container */}
-            <div className="relative w-full max-w-lg">
-              {/* Background glow */}
-              <div className="absolute inset-0 -m-4 rounded-3xl bg-gradient-to-br from-blue-400/20 via-transparent to-rose-400/10 blur-2xl" />
-
-              {/* Main image */}
-              <div className="relative overflow-hidden rounded-3xl shadow-2xl shadow-slate-900/15 animate-pulse-glow">
-                <Image
-                  src={HappyWoman}
-                  alt="Happy woman using AR Data for VTU services"
-                  className="h-full w-full object-cover"
-                  priority
-                />
-                {/* Gradient overlay on bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/60 to-transparent" />
-
-                {/* Bottom text overlay */}
-                <div className="absolute inset-x-0 bottom-0 p-6">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-blue-300">
-                    Trusted by 100K+ users
-                  </p>
-                  <p className="mt-1 text-lg font-bold text-white">
-                    Fast. Reliable. Affordable.
-                  </p>
-                </div>
-              </div>
-
-              {/* Floating network logos */}
-              {/* MTN - top left */}
-              <div className="absolute -top-4 -left-4 z-10 animate-float">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-1.5 shadow-xl shadow-yellow-500/20 ring-2 ring-white/80 sm:h-20 sm:w-20 sm:p-2">
-                  <Image
-                    src={MtnLogo}
-                    alt="MTN"
-                    className="h-full w-full rounded-xl object-cover"
-                  />
-                </div>
-              </div>
-
-              {/* Airtel - top right */}
-              <div
-                className="absolute -top-3 -right-3 z-10 animate-float-delayed"
-                style={{ animationDelay: "1s" }}
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-2.5 shadow-xl shadow-red-500/20 ring-2 ring-white/80 sm:h-20 sm:w-20 sm:p-3">
-                  <Image
-                    src={AirtelLogo}
-                    alt="Airtel"
-                    className="h-full w-full object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* Glo - bottom left */}
-              <div
-                className="absolute -bottom-3 -left-3 z-10 animate-float"
-                style={{ animationDelay: "0.5s" }}
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-2 shadow-xl shadow-green-500/20 ring-2 ring-white/80 sm:h-20 sm:w-20 sm:p-2.5">
-                  <Image
-                    src={GloLogo}
-                    alt="Glo"
-                    className="h-full w-full object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* 9mobile - bottom right */}
-              <div
-                className="absolute -bottom-4 -right-4 z-10 animate-float-delayed"
-                style={{ animationDelay: "1.5s" }}
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-2 shadow-xl shadow-teal-500/20 ring-2 ring-white/80 sm:h-20 sm:w-20 sm:p-2.5">
-                  <Image
-                    src={NineMobileLogo}
-                    alt="9mobile"
-                    className="h-full w-full object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* Floating badge card */}
-              <div
-                className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 animate-float hidden sm:block"
-                style={{ animationDelay: "2s" }}
-              >
-                <div className="rounded-2xl bg-white/95 backdrop-blur-md px-4 py-3 shadow-xl ring-1 ring-slate-200/50">
-                  <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100">
-                      <CheckCircle2 className="h-4 w-4 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-slate-950">
-                        Instant Delivery
-                      </p>
-                      <p className="text-[10px] text-slate-500">
-                        Data sent in &lt;3s
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ═══ NETWORK LOGOS STRIP ═══ */}
-      <section className="border-y border-slate-200/60 bg-white py-8">
+      <section className="relative border-y border-slate-200/60 bg-white py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-slate-400">
+          <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
             All major networks supported
           </p>
           <div className="flex items-center justify-center gap-8 sm:gap-16 flex-wrap">
             {networks.map((network) => (
               <div
                 key={network.name}
-                className="group flex flex-col items-center gap-2 transition-transform hover:scale-110"
+                className="group flex flex-col items-center gap-2.5 transition-transform hover:scale-110"
               >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 p-2 shadow-sm ring-1 ring-slate-200/60 transition group-hover:shadow-md group-hover:ring-slate-300 sm:h-20 sm:w-20 sm:p-3">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#fafbfc] p-2 ring-1 ring-slate-200 transition group-hover:bg-white group-hover:shadow-md group-hover:ring-slate-350 sm:h-20 sm:w-20 sm:p-3">
                   <Image
                     src={network.logo}
                     alt={network.name}
                     className="h-full w-full object-contain rounded-lg"
                   />
                 </div>
-                <span className="text-xs font-semibold text-slate-500 group-hover:text-slate-900 transition-colors">
+                <span className="text-xs font-semibold text-slate-400 group-hover:text-slate-900 transition-colors">
                   {network.name}
                 </span>
               </div>
@@ -568,10 +463,14 @@ const LandingHome = () => {
       </section>
 
       {/* ═══ SERVICES ═══ */}
-      <section id="services" className="bg-[#fafbfc] py-20 sm:py-24" ref={servicesRef}>
+      <section
+        id="services"
+        className="relative py-14 sm:py-16 bg-[#fafbfc]"
+        ref={servicesRef}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
-            className={`flex flex-col justify-between gap-4 md:flex-row md:items-end ${
+            className={`flex flex-col justify-between gap-6 md:flex-row md:items-end ${
               servicesVisible ? "animate-slide-up" : "opacity-0"
             }`}
           >
@@ -580,41 +479,40 @@ const LandingHome = () => {
                 <Zap className="h-3 w-3" />
                 Core Services
               </div>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+              <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
                 Everything you need,{" "}
                 <span className="gradient-text">in one place</span>
               </h2>
-              <p className="mt-3 max-w-2xl text-base text-slate-500">
-                From data bundles to bill payments, we've got every digital
+              <p className="mt-4 max-w-2xl text-base text-slate-500">
+                From data bundles to bill payments, we&apos;ve got every digital
                 service your daily life requires.
               </p>
             </div>
             <Link
               href="/signin"
-              className="group inline-flex w-fit items-center gap-2 rounded-xl bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+              className="group inline-flex w-fit items-center gap-2 rounded-xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 shadow-lg shadow-slate-950/10"
             >
               Open Dashboard
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Bento-style service grid */}
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((service, i) => {
               const Icon = service.icon;
               return (
                 <Link
                   href={service.href}
                   key={service.title}
-                  className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${service.bgGlow} ${
-                    servicesVisible
-                      ? "animate-scale-in"
-                      : "opacity-0"
+                  className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-7 transition-all duration-500 hover:border-slate-350 hover:shadow-xl hover:-translate-y-1 ${
+                    servicesVisible ? "animate-scale-in" : "opacity-0"
                   }`}
                   style={{ animationDelay: `${i * 100}ms` }}
                 >
-                  {/* Gradient orb */}
+                  {/* Gradient orb on hover */}
                   <div
-                    className={`absolute -top-12 -right-12 h-32 w-32 rounded-full bg-gradient-to-br ${service.color} opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-20`}
+                    className={`absolute -top-16 -right-16 h-40 w-40 rounded-full bg-gradient-to-br ${service.color} opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-10`}
                   />
 
                   <div
@@ -630,9 +528,9 @@ const LandingHome = () => {
                     {service.description}
                   </p>
 
-                  <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-blue-600">
+                  <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-blue-600 transition-colors group-hover:text-blue-700">
                     Get started
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </Link>
               );
@@ -642,10 +540,15 @@ const LandingHome = () => {
       </section>
 
       {/* ═══ WHY AR DATA ═══ */}
-      <section id="why-us" className="bg-white py-20 sm:py-24" ref={whyRef}>
+      <section id="why-us" className="relative py-14 sm:py-16 bg-white overflow-hidden" ref={whyRef}>
+        {/* Divider line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+        {/* Subtle dot grid pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-35 pointer-events-none" />
+
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
-            className={`grid gap-12 lg:grid-cols-2 ${
+            className={`grid gap-16 lg:grid-cols-2 ${
               whyVisible ? "animate-slide-up" : "opacity-0"
             }`}
           >
@@ -655,25 +558,25 @@ const LandingHome = () => {
                 <Star className="h-3 w-3" />
                 Why choose us
               </div>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+              <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
                 A smarter way to manage{" "}
                 <span className="gradient-text">digital payments</span>
               </h2>
-              <p className="mt-4 max-w-lg text-base leading-relaxed text-slate-500">
+              <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-500">
                 The interface keeps essential VTU actions close, so customers can
                 move from wallet funding to service purchase without switching
                 tools or losing transaction records.
               </p>
 
-              <div className="mt-10 space-y-5">
-                {highlights.map((item, i) => {
+              <div className="mt-10 space-y-4">
+                {highlights.map((item) => {
                   const Icon = item.icon;
                   return (
                     <div
                       key={item.title}
-                      className="group flex gap-4 rounded-2xl border border-slate-100 bg-slate-50/50 p-5 transition-all hover:border-blue-200 hover:bg-blue-50/30 hover:shadow-md"
+                      className="group flex gap-4 rounded-2xl border border-slate-100 bg-[#fafbfc] p-5 transition-all duration-300 hover:border-blue-200 hover:bg-blue-50/20"
                     >
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/20">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
@@ -694,10 +597,10 @@ const LandingHome = () => {
             <div className="flex items-center justify-center">
               <div className="relative w-full max-w-md">
                 {/* Glow */}
-                <div className="absolute inset-0 -m-6 rounded-3xl bg-gradient-to-br from-blue-400/15 to-rose-400/10 blur-2xl" />
+                <div className="absolute inset-0 -m-8 rounded-3xl bg-gradient-to-br from-blue-500/10 to-indigo-500/5 blur-3xl" />
 
-                <div className="relative rounded-3xl bg-gradient-to-br from-[#0f1d3a] to-[#1e3a8a] p-1 shadow-2xl">
-                  <div className="rounded-[22px] bg-gradient-to-br from-[#0a1530] to-[#0f1d3a] p-7">
+                <div className="relative rounded-3xl bg-gradient-to-br from-slate-200 to-slate-300 p-[1px] shadow-2xl shadow-slate-900/10">
+                  <div className="rounded-[23px] bg-[#0a0f1c] p-7">
                     {/* Top bar */}
                     <div className="flex items-center justify-between border-b border-white/10 pb-5">
                       <div className="flex items-center gap-3">
@@ -710,12 +613,12 @@ const LandingHome = () => {
                           <p className="text-sm font-semibold text-blue-100">
                             AR Data Wallet
                           </p>
-                          <p className="text-xs text-white/40">
+                          <p className="text-xs text-white/30">
                             Ready for purchase
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-1.5 rounded-full bg-blue-400/20 px-3 py-1">
+                      <div className="flex items-center gap-1.5 rounded-full bg-blue-400/15 px-3 py-1">
                         <div className="h-2 w-2 animate-pulse rounded-full bg-blue-400" />
                         <span className="text-[10px] font-bold text-blue-300">
                           LIVE
@@ -724,23 +627,23 @@ const LandingHome = () => {
                     </div>
 
                     {/* Balance card */}
-                    <div className="mt-5 rounded-2xl bg-white p-5">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    <div className="mt-5 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-750 p-5">
+                      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-blue-200/70">
                         Wallet Balance
                       </p>
-                      <p className="mt-2 text-3xl font-extrabold text-slate-950">
+                      <p className="mt-2 text-3xl font-extrabold text-white">
                         ₦25,000
                       </p>
                       <div className="mt-4 grid grid-cols-2 gap-2">
                         <Link
                           href="/signin"
-                          className="group rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 text-center text-xs font-bold text-white transition-all hover:shadow-lg hover:shadow-blue-600/25"
+                          className="group rounded-xl bg-white px-4 py-2.5 text-center text-xs font-bold text-blue-750 transition-all hover:shadow-lg"
                         >
                           Buy Data
                         </Link>
                         <Link
                           href="/signin"
-                          className="rounded-xl border border-slate-200 px-4 py-2.5 text-center text-xs font-bold text-slate-800 transition hover:bg-slate-50"
+                          className="rounded-xl border border-white/30 px-4 py-2.5 text-center text-xs font-bold text-white transition hover:bg-white/10"
                         >
                           Pay Bill
                         </Link>
@@ -750,17 +653,27 @@ const LandingHome = () => {
                     {/* Quick actions */}
                     <div className="mt-4 grid grid-cols-2 gap-3">
                       {[
-                        { label: "MTN 2GB", value: "₦500", color: "bg-yellow-400/10 text-yellow-300" },
-                        { label: "Airtel 1GB", value: "₦300", color: "bg-red-400/10 text-red-300" },
+                        {
+                          label: "MTN 2GB",
+                          value: "₦500",
+                          color: "text-yellow-450 bg-yellow-450/10",
+                        },
+                        {
+                          label: "Airtel 1GB",
+                          value: "₦300",
+                          color: "text-red-400 bg-red-400/10",
+                        },
                       ].map((item) => (
                         <div
                           key={item.label}
-                          className="rounded-xl bg-white/5 p-3.5 ring-1 ring-white/10 transition hover:bg-white/10"
+                          className="rounded-xl bg-white/[0.04] p-3.5 ring-1 ring-white/[0.06] transition hover:bg-white/[0.08]"
                         >
-                          <p className={`text-[10px] font-semibold uppercase tracking-wider ${item.color}`}>
+                          <p
+                            className={`text-[10px] font-semibold uppercase tracking-wider ${item.color} w-fit px-2 py-0.5 rounded-md`}
+                          >
                             {item.label}
                           </p>
-                          <p className="mt-1 text-lg font-bold text-white">
+                          <p className="mt-1.5 text-lg font-bold text-white">
                             {item.value}
                           </p>
                         </div>
@@ -768,22 +681,22 @@ const LandingHome = () => {
                     </div>
 
                     {/* Recent transaction */}
-                    <div className="mt-4 rounded-xl bg-white/5 p-3.5 ring-1 ring-white/10">
+                    <div className="mt-4 rounded-xl bg-white/[0.04] p-3.5 ring-1 ring-white/[0.06]">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-400/20">
-                            <CheckCircle2 className="h-3.5 w-3.5 text-blue-400" />
+                        <div className="flex items-center gap-2.5">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400/15">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                           </div>
                           <div>
                             <p className="text-xs font-semibold text-white">
                               Glo 3GB
                             </p>
-                            <p className="text-[10px] text-white/40">
+                            <p className="text-[10px] text-white/30">
                               Just now
                             </p>
                           </div>
                         </div>
-                        <span className="text-xs font-bold text-blue-400">
+                        <span className="text-xs font-bold text-emerald-400">
                           Success
                         </span>
                       </div>
@@ -799,9 +712,12 @@ const LandingHome = () => {
       {/* ═══ TESTIMONIALS ═══ */}
       <section
         id="testimonials"
-        className="bg-[#fafbfc] py-20 sm:py-24"
+        className="relative py-14 sm:py-16 bg-[#fafbfc]"
         ref={testimonialsRef}
       >
+        {/* Divider line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className={`text-center ${
@@ -812,21 +728,21 @@ const LandingHome = () => {
               <Star className="h-3 w-3" />
               Customer Stories
             </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+            <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
               Loved by{" "}
               <span className="gradient-text">thousands of Nigerians</span>
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base text-slate-500">
+            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-500">
               From students managing their data to business owners paying
               utilities daily, AR Data simplifies digital payments for everyone.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((t, i) => (
               <div
                 key={t.name}
-                className={`group rounded-2xl border border-slate-200/80 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-200 ${
+                className={`group rounded-2xl border border-slate-200/80 bg-white p-7 transition-all duration-500 hover:border-slate-350 hover:shadow-xl hover:-translate-y-1 ${
                   testimonialsVisible ? "animate-scale-in" : "opacity-0"
                 }`}
                 style={{ animationDelay: `${i * 150}ms` }}
@@ -841,11 +757,11 @@ const LandingHome = () => {
                   ))}
                 </div>
 
-                <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                  "{t.text}"
+                <p className="mt-5 text-sm leading-relaxed text-slate-600">
+                  &ldquo;{t.text}&rdquo;
                 </p>
 
-                <div className="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
+                <div className="mt-6 flex items-center gap-3 border-t border-slate-105 pt-5">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-sm font-bold text-white">
                     {t.name.charAt(0)}
                   </div>
@@ -879,8 +795,11 @@ const LandingHome = () => {
       </section>
 
       {/* ═══ FAQ ═══ */}
-      <section id="faq" className="bg-white py-20 sm:py-24" ref={faqRef}>
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <section id="faq" className="relative py-14 sm:py-16 bg-white" ref={faqRef}>
+        {/* Divider line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+
+        <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div
             className={`text-center ${
               faqVisible ? "animate-slide-up" : "opacity-0"
@@ -890,11 +809,11 @@ const LandingHome = () => {
               <BadgeCheck className="h-3 w-3" />
               FAQ
             </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+            <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
               Got questions?{" "}
-              <span className="gradient-text">We've got answers</span>
+              <span className="gradient-text">We&apos;ve got answers</span>
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-base text-slate-500">
+            <p className="mx-auto mt-4 max-w-xl text-base text-slate-500">
               Everything you need to know about AR Data and our VTU services.
             </p>
           </div>
@@ -909,12 +828,12 @@ const LandingHome = () => {
             ))}
           </div>
 
-          <div className="mt-10 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 text-center">
+          <div className="mt-10 rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50/50 to-indigo-50/30 p-6 text-center">
             <p className="font-semibold text-blue-900">
               Still have questions?{" "}
               <a
                 href="tel:+2348140950947"
-                className="inline-flex items-center gap-1 font-bold underline decoration-blue-400 decoration-2 underline-offset-4 hover:decoration-blue-600"
+                className="inline-flex items-center gap-1 font-bold text-blue-600 underline decoration-blue-600/30 decoration-2 underline-offset-4 hover:decoration-blue-600 transition"
               >
                 <PhoneCall className="h-3.5 w-3.5" />
                 Call our support team
@@ -925,78 +844,84 @@ const LandingHome = () => {
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0a1530] via-[#0f1c3f] to-[#0a1530] py-20 text-white sm:py-24">
-        {/* Decorative */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-blue-500/5 blur-3xl" />
-          <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-blue-400/10 blur-3xl" />
-        </div>
+      <section className="relative overflow-hidden py-14 sm:py-16 bg-[#fafbfc]">
+        {/* Divider line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:px-8">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-300">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 text-center overflow-hidden shadow-md shadow-slate-200/20">
+            {/* Subtle dot grid pattern inside CTA card */}
+            <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-40 pointer-events-none" />
+            {/* Inner glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 h-px w-1/2 bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
               <Sparkles className="h-3 w-3" />
               Ready to start?
             </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
               Start saving on data, airtime &{" "}
-              <span className="text-blue-400">bill payments</span> today.
+              <span className="text-blue-600">bill payments</span> today.
             </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/60">
+            <p className="mt-5 mx-auto max-w-2xl text-sm leading-relaxed text-slate-500 sm:text-base">
               Join thousands of Nigerians who trust AR Data for all their VTU
               needs. Agents and business teams can use their dedicated sign-in
               paths as the platform grows.
             </p>
-          </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/signup"
-              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-400 to-indigo-400 px-7 py-3.5 text-sm font-bold text-blue-950 shadow-xl shadow-blue-500/20 transition-all hover:shadow-2xl hover:shadow-blue-500/30 hover:-translate-y-0.5"
-            >
-              Create Account
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <a
-              href="tel:+2348140950947"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
-            >
-              <PhoneCall className="h-4 w-4" />
-              Call Support
-            </a>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row justify-center">
+              <Link
+                href="/signup"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-sm font-bold text-white shadow-xl shadow-blue-600/20 transition-all hover:bg-blue-500 hover:shadow-2xl hover:-translate-y-0.5"
+              >
+                Create Account
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <a
+                href="tel:+2348140950947"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-8 py-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-slate-400"
+              >
+                <PhoneCall className="h-4 w-4" />
+                Call Support
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="border-t border-slate-200/60 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <footer className="relative border-t border-slate-200/60 bg-white overflow-hidden">
+        {/* Subtle dot grid pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
+        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand */}
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3">
-                <Image
-                  src={Logo}
-                  alt="AR Data"
-                  className="h-11 w-11 rounded-full object-cover"
-                />
+                <div className="relative">
+                  <Image
+                    src={Logo}
+                    alt="AR Data"
+                    className="relative h-11 w-11 rounded-full object-cover ring-2 ring-slate-100"
+                  />
+                </div>
                 <div>
                   <span className="text-lg font-bold text-slate-950">
                     AR Data
                   </span>
-                  <p className="text-[10px] font-medium uppercase tracking-widest text-blue-600">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-blue-600">
                     VTU Platform
                   </p>
                 </div>
               </div>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-500">
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-500">
                 Your trusted partner for data bundles, airtime, bill payments,
                 and identity verification services across all major Nigerian
                 networks.
               </p>
 
               {/* Network logos in footer */}
-              <div className="mt-5 flex items-center gap-3">
+              <div className="mt-6 flex items-center gap-3">
                 {networks.map((n) => (
                   <div
                     key={n.name}
@@ -1025,7 +950,7 @@ const LandingHome = () => {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="text-sm text-slate-500 transition hover:text-blue-600"
+                    className="text-sm text-slate-500 transition hover:text-blue-650"
                   >
                     {link.label}
                   </Link>
@@ -1046,7 +971,7 @@ const LandingHome = () => {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="text-sm text-slate-500 transition hover:text-blue-600"
+                    className="text-sm text-slate-500 transition hover:text-blue-650"
                   >
                     {link.label}
                   </Link>
@@ -1055,7 +980,7 @@ const LandingHome = () => {
             </div>
           </div>
 
-          <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-slate-100 pt-8 sm:flex-row">
+          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-100 pt-8 sm:flex-row">
             <p className="text-sm text-slate-400">
               © {new Date().getFullYear()} AR Data. All rights reserved.
             </p>
